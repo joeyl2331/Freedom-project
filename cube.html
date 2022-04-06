@@ -19,12 +19,14 @@
     </head>
     <body>
         <!-- HTML -->
+    <div class="shape demos">
+      
         <div class="ui people shape">
           <div class="sides">
             <div class="side active">
               <div class="ui card">
                 <div class="image">
-                  <img src="/images/avatar/large/steve.jpg">
+                  <img src="img/img1.jpg">
                 </div>
                 <div class="content">
                   <div class="header">Steve Jobes</div>
@@ -49,7 +51,7 @@
             <div class="side">
               <div class="ui card">
                 <div class="image">
-                  <img src="/images/avatar/large/stevie.jpg">
+                  <img src="img/img2.jpg">
                 </div>
                 <div class="content">
                   <a class="header">Stevie Feliciano</a>
@@ -71,11 +73,62 @@
           </div>
         </div>
         
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            // JS
+    <!-- code imported from shape.html -->
+        <div class="ui ignored hidden divider"></div>
+          <div class="ui ignored icon direction buttons">
+            <div class="ui button" data-animation="flip" title="Flip Left" data-direction="left"><i class="left long arrow icon"></i></div>
+            <div class="ui button" data-animation="flip" title="Flip Up" data-direction="up"><i class="up long arrow icon"></i></div>
+            <div class="ui icon button" data-animation="flip" title="Flip Down" data-direction="down"><i class="down long arrow icon"></i></div>
+            <div class="ui icon button" data-animation="flip" title="Flip Right" data-direction="right"><i class="right long arrow icon"></i></div>
+          </div>
+    
+          <div class="ui ignored icon direction buttons">
+            <div class="ui button" title="Flip Over" data-animation="flip" data-direction="over"><i class="retweet icon"></i></div>
+            <div class="ui button" title="Flip Back" data-animation="flip" data-direction="back"><i class="flipped retweet icon"></i></div>
+          </div>
+        
+     
+    </div>
+        
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+         <script type="text/javascript">
+            $(document)
+              .ready(function() {
             
+                var
+                  $demo            = $('.shape.demos .ui.shape'),
+                  $directionButton = $('.shape.demos .direction .button'),
+                  handler
+                ;
             
+                // event handlers
+                handler = {
+                  rotate: function() {
+                    var
+                      $shape    = $(this).closest('.buttons').prevAll('.ui.shape').eq(0),
+                      direction = $(this).data('direction') || false,
+                      animation = $(this).data('animation') || false
+                    ;
+                    if(direction && animation) {
+                      $shape
+                        .shape(animation + '.' + direction)
+                      ;
+                    }
+                  }
+                };
+            
+                // attach events
+                $demo
+                  .shape()
+                ;
+                $directionButton
+                  .on('click', handler.rotate)
+                  .popup({
+                    position  : 'bottom center'
+                  })
+                ;
+              })
+            ;
         </script>
     </body>
 </html>
